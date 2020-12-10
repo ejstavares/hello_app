@@ -74,12 +74,14 @@ void main() {
     //setup
     var json =
         '{"id":"1","title":"title 001","description":"Test 1","created_at":"do day"}';
+
     //act
     var jsonMap = jsonDecode(json);
 
     var taskResource = TaskResource.fromJson(jsonMap);
 
     print("taskResource.id: ${taskResource.id}");
+
     //assert
     expect(taskResource.id, jsonMap['id']);
   });
