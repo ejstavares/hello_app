@@ -77,7 +77,9 @@ void main() {
     //act
     var jsonMap = jsonDecode(json);
 
-    var taskResource = TaskResource().fromJson(jsonMap);
+    var taskResource = TaskResource.fromJson(jsonMap);
+
+    print("taskResource.id: ${taskResource.id}");
     //assert
     expect(taskResource.id, jsonMap['id']);
   });

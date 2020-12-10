@@ -1,22 +1,34 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'task_resource.g.dart';
+
+@JsonSerializable(nullable: false, fieldRename: FieldRename.snake)
 class TaskResource {
-  final String id;
-  final String createdAt;
-  final String description;
-  final String title;
+  String id;
+  String createdAt;
+  @JsonKey(name: 'description')
+  String description;
+  String title;
 
   TaskResource({this.id, this.title, this.description, this.createdAt});
 
   Map<String, dynamic> toJson() {
-    var json = Map<String, dynamic>();
-    json['id'] = this.id;
-    json['title'] = this.title;
-    json['description'] = this.description;
-    json['created_at'] = this.createdAt;
-
-    return json;
+    return _$TaskResourceToJson(this);
+    // return {
+    //   'id': this.id,
+    //   'title': this.title,
+    //   'description': this.description,
+    //   'created_at': this.createdAt
+    // };
   }
 
-  TaskResource fromJson(Map<String, dynamic> jsonMap) {
-    return null;
-  }
+  factory TaskResource.fromJson(Map<String, dynamic> jsonMap) =>
+      _$TaskResourceFromJson(jsonMap);
+  //   return _$TaskResourceFromJson(jsonMap);
+
+  //   // this.id = jsonMap['id'];
+  //   // this.title = jsonMap['title'];
+  //   // this.description = jsonMap['description'];
+  //   // this.createdAt = jsonMap['created_at'];
+  // }
 }
