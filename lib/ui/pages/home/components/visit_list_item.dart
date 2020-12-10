@@ -19,9 +19,8 @@ class VisitListItem extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 16.0),
               padding: EdgeInsets.all(8.0),
               decoration: BoxDecoration(
-                color: appVisitItemColor1,
-                borderRadius: BorderRadius.circular(5)
-              ),
+                  color: appVisitItemColor1,
+                  borderRadius: BorderRadius.circular(5)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

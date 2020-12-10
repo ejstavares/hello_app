@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hello_app/data/models/task_resource.dart';
 import 'package:http/http.dart' as http;
 
 void main() {
@@ -10,7 +12,7 @@ void main() {
 
     //act
     var response = await http
-        .get('https://5faaf775dbbef70016d47f6f.mockapi.io/api/v1/tasks/10000');
+        .get('https://5faaf775dbbef70016d47f6f.mockapi.io/api/v1/tasks/10');
 
     print("response statusCode: ${response.statusCode} ");
     print("response: ${response.body}");
@@ -52,5 +54,31 @@ void main() {
 
     //assert
     expect(response.statusCode, 200);
+  });
+  test("visit serialize test", () async {
+    //setup
+    var taskResource = TaskResource(
+        id: '1',
+        createdAt: "do day",
+        description: 'Test 1',
+        title: 'title 001');
+
+    //act
+    var json = taskResource.toJson();
+    print("Json: ${jsonEncode(json)}");
+    //assert
+    expect(json['id'], taskResource.id);
+  });
+
+  test("visit deserialize test", () async {
+    //setup
+    var json =
+        '{"id":"1","title":"title 001","description":"Test 1","created_at":"do day"}';
+    //act
+    var jsonMap = jsonDecode(json);
+
+    var taskResource = TaskResource().fromJson(jsonMap);
+    //assert
+    expect(taskResource.id, jsonMap['id']);
   });
 }
